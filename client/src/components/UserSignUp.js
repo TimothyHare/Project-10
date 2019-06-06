@@ -2,8 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom'; 
 import axios from "axios";
 
-class UserSignUp extends Component{ 
-
+class UserSignUp extends Component { 
     render() {    
             <div>
             <hr />
