@@ -1,7 +1,29 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'; 
 
-class UserSignIn extends Component{ 
+class UserSignIn extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      emailAddress: '',
+      password: '' 
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }   
+   
+  handleSubmit = event => {
+    console.log( this.state)
+    event.preventDefault();
+    let userInfo = {"password": this.state.password, "emailAddress": this.state.emailAddress} 
+    this.props.signIn(userInfo)
+  };
+
+    change = e => {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
 
     render() {
         return ( 
