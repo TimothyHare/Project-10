@@ -1,5 +1,6 @@
 //Johnny louifils walked me through creating this
-import React from "react";
+
+import React, {Component} from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom"; 
 import ReactMarkdown from "react-markdown"

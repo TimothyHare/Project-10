@@ -1,5 +1,5 @@
 //Johnny Louifils helped me create this file
-import React from 'react';
+import React, {Component} from 'react';
 import  axios  from "axios";
 
 class UpdateCourse extends Component {

@@ -14,6 +14,7 @@ import UserSignIn from "./components/UserSignIn";
 import UserSignUp from "./components/UserSignUp";
 import CreateCourse from "./components/CreateCourse";
 import UpdateCourse from "./components/UpdateCourse";
+import PrivateRoute from "./components/PrivateRoute"
 import UserSignOut from "./components/UserSignOut";
 
 
