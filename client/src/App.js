@@ -10,13 +10,15 @@ import "./global.css";
 import Header from "./components/Header";
 import Courses from "./components/Courses";
 import CourseDetail from "./components/CourseDetail";
-import UserSignIn from "./components/UserSignIn";
-import UserSignUp from "./components/UserSignUp";
 import CreateCourse from "./components/CreateCourse";
+import UserSignIn from "./components/UserSignIn";
 import UpdateCourse from "./components/UpdateCourse";
 import PrivateRoute from "./components/PrivateRoute"
 import UserSignOut from "./components/UserSignOut";
-
+import UserSignUp from "./components/UserSignUp";
+import Error from './components/Error';
+import NotFound from './components/Not-Found';
+import Forbidden from './components/Forbidden';
 
 class App extends Component {
 constructor() {
@@ -58,6 +60,9 @@ signIn(userInfo) {
             <Route exact path="/UsersignIn" component={() => <UserSignIn  signIn={this.signIn}/>} /> 
             <Route exact path="/UserSignUp" component={UserSignUp} />
             <Route exact path="/UserSignOut" component={UserSignOut} />
+            <Route exact path="/error" render={() => <Error />} />
+            <Route exact path='/notfound' component = {NotFound} />
+            <Route exact path='/forbidden' component = {Forbidden} />
           </Switch>
         </div>
       </BrowserRouter>
