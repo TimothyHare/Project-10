@@ -21,6 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
 
+//Enable cors for all request
+app.use(cors());
+
 // mongodb connection
 mongoose.connect("mongodb://localhost:27017/fsjstd-restapi", { useNewUrlParser: true})
 var db = mongoose.connection;

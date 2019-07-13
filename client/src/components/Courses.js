@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 
-class Courses extends Component {
+class Courses extends React.Component {
     
     constructor(props){
         super(props)

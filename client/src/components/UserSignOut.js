@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React from "react";
 import {Redirect} from "react-router-dom";
 
-class UserSignOut extends Component{ 
+class UserSignOut extends React.Component{ 
 
     logOut = () => {
         window.localStorage.removeItem('FirstName')

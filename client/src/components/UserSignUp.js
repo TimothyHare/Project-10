@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom'; 
 import axios from "axios";
 
-class UserSignUp extends Component { 
+class UserSignUp extends React.Component { 
   constructor(props) {
     super(props);
     this.state = {

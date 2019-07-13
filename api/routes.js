@@ -25,46 +25,59 @@ router.param("id", function(req, res, next, id){
 });
 
 const authorizeUser = (req, res, next) => {
-    const creds = authorization(req);
-    if (creds) {
-      User.findOne({ emailAddress: creds.name }, function(err, user) {
-        if (user) {
-          const authenticate = bcrypt.compareSync(creds.pass, user.password);
-        if (authenticate) {
-            console.log(`Authorization successful for user: ${user.firstName} ${user.lastName}!`);
-            req.currentUser = user;
-            next();
-          } else {
-            err = new Error("Authorization failure. Username and/or password not valid.");
-            err.status = 401;
-            next(err);
-          }
-        } else {
-          err = new Error("Authorization failure. Username and/or password not valid.");
-          err.status = 401;
-          next(err);
-        }
-      })
+    if(authorization(req) == null){
+        const err = new Error("username and password required");
+        err.status = 401;
+        next(err);
+  }
+  User.findOne({ emailAddress: authorized(req).name}, function(err, user){
+    if(user) {
+      const auth = bcrypt.compareSync(authorized(req).pass, user.password);
+      if(auth) {
+        console.log(`Successful username ${user.emailAddress}`);
+        req.currentUser = user;
+        next(); 
+      } else {
+        err = new Error("failure");
+        err.status = 401;
+        next(err);
+      }
     } else {
-      res.status(401).json({ message: "Email address and password are required" });
+      err = new Error("User Not Found!");
+      err.status = 401;
+      next(err);
     }
+  });
 };
+
 
 // Users
 
 //Get User Route
 router.get("/users", authorizeUser, function(req, res, next){
-  const users = req.currentUser;
-  return res.json(users);
+  User.find({})
+              .exec(function(err,users){
+                if(err) return next(err);
+                res.json(req.currentUser);
+              });
 });
 
 //Post User Route 
 router.post("/users", function(req, res, next){
-  const user = new User(req.body); 
-  user.save(user, function(err){
-  if (err) return res.status(400).json({error: err.message});
-  res.location('/');
-  res.status(201).end();
+  const user = new User({
+    firstName: req.body.firstName, 
+    lastName: req.body.lastName,
+    emailAddress: req.body.emailAddress,
+    password: bcrypt.hashSync(req.body.password),
+  }); 
+  user.save().then(results =>{
+    console.log(results);
+    res.location('/api');
+    res.status(201).json('User Created!');
+  })
+  .catch(err =>{
+    console.log(err);
+    res.status(400).json({error: err});
   });
 });
 

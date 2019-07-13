@@ -1,8 +1,8 @@
 //Johnny Louifils helped me create this file
-import React, {Component} from 'react';
+import React from 'react';
 import  axios  from "axios";
 
-class UpdateCourse extends Component {
+class UpdateCourse extends React.Component {
 
     constructor(props) {
         super(props);

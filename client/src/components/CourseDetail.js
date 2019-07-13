@@ -1,11 +1,11 @@
 //Johnny louifils walked me through creating this
 
-import React, {Component} from "react";
+import React from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom"; 
 import ReactMarkdown from "react-markdown"
 
-class CourseDetail extends Component {
+class CourseDetail extends React.Component {
 
     constructor(props) {
         super(props);

@@ -1,10 +1,10 @@
 //Johnny Louifils helped me create this
 
-import React, {Component} from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
-class CreateCourse extends Component {
+class CreateCourse extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
