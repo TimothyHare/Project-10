@@ -14,8 +14,6 @@ const UserSchema = new Schema({
     password: {type: String,required: [true, 'Password is required']}
 });
 
-const User = mongoose.model('User', UserSchema);
-
 const CourseSchema = new Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref:"User"},
     
@@ -30,4 +28,9 @@ const CourseSchema = new Schema({
 
 const Course = mongoose.model('Course', CourseSchema);
 
-module.exports = {User, Course};
+const User = mongoose.model('User', UserSchema);
+
+
+module.exports = {
+    User, Course
+}
