@@ -11,11 +11,15 @@ class UserSignUp extends React.Component {
       emailAddress: '',
       password: '',
       confirmPassword: '',
-      errors: []
+      errors: [],
+      emailError: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this); 
   }   
 
+  componentDidMount() {
+    this.setState({emailError: null})
+  }
  
   handleSubmit = (e) => {
     e.preventDefault();
@@ -40,9 +44,10 @@ class UserSignUp extends React.Component {
         throw new Error();
       } 
     }).catch(err => {        
-      console.log("CATCH =", err.response.data.errors);
+      console.log("CATCH =", err.response.data.error);
       this.setState({       
-        errors: err.response.data.errors
+        errors: err.response.data.error.message,
+        emailError: err.response.data.error.errmsg
       });
     }); 
   }
@@ -58,8 +63,15 @@ class UserSignUp extends React.Component {
    
     render() {   
       const errors = this.state.errors; 
-      const errorList = errors.map((error) =>
-        <li key={error.toString()}>{error}</li>);
+      let emailError = '';
+      // const errorList = errors.map((error) =>
+      //   <li key={error.toString()}>{error}</li>);
+
+      if (this.state.emailError != null) {
+        emailError = "Email already exist in database. Please choose another!"
+      } else {
+        emailError = ''
+      }
   
          return ( 
           <div>
@@ -69,7 +81,8 @@ class UserSignUp extends React.Component {
             <h1>Sign Up</h1>
             <div>
               <div className="validation-errors">
-                <ul>{errorList}</ul>
+                <ul>{errors}</ul>
+                <ul>{emailError}</ul>
               </div>
             </div>
               <div>

@@ -57,9 +57,9 @@ signIn(userInfo) {
             <PrivateRoute path="/courses/create"  component={CreateCourse} /> 
             <PrivateRoute path="/courses/:id/update" component={UpdateCourse} /> 
             <Route exact path="/courses/:id" component={CourseDetail} />
-            <Route exact path="/UsersignIn" component={() => <UserSignIn  signIn={this.signIn}/>} /> 
-            <Route exact path="/UserSignUp" component={UserSignUp} />
-            <Route exact path="/UserSignOut" component={UserSignOut} />
+            <Route exact path="/usersignin" component={() => <UserSignIn  signIn={this.signIn}/>} /> 
+            <Route exact path="/usersignup" component={UserSignUp} />
+            <Route exact path="/usersignout" component={UserSignOut} />
             <Route exact path="/error" render={() => <Error />} />
             <Route exact path='/notfound' component = {NotFound} />
             <Route exact path='/forbidden' component = {Forbidden} />

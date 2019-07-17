@@ -24,39 +24,46 @@ class CreateCourse extends React.Component {
     }
 
     handleSubmit = (evt) => {
-        evt.preventDefault();
-
-        axios({
-            method: 'post',
-            url: 'http://localhost:5000/api/courses',
-            auth: {
-              username: window.localStorage.getItem("Email"),
-              password: window.localStorage.getItem("Password")
-            },
-            data: {
-                title: this.state.title,
-                description: this.state.description,
-                estimatedTime: this.state.estimatedTime,
-                materialsNeeded: this.state.materialsNeeded
-                }  
-            })
-            .then(alert('course created!'))
-            .then( ()=> {
-                const { history } =this.props;
-                history.push('/')
-            })
-            .catch(err => {
-              this.setState({ 
-                errors: err.response.data.errors
+        evt.preventDefault(); // prevent page load
+        if (this.state.description === '' || this.state.title === '') {
+          this.setState({
+            errors: 'Course and Description are required!'
+          })
+          // alert('Course and Description are required!');
+        } else {
+          axios({
+              method: 'post',
+              url: 'http://localhost:5000/api/courses',
+              auth: {
+                username: window.localStorage.getItem("Email"),
+                password: window.localStorage.getItem("Password")
+              },
+              data: {
+                  title: this.state.title,
+                  description: this.state.description,
+                  estimatedTime: this.state.estimatedTime,
+                  materialsNeeded: this.state.materialsNeeded
+                  }  
+              })
+              .then(alert('course created!'))
+              .then( ()=> {
+                  const { history } =this.props;
+                  history.push('/')
+              })
+              .catch(err => {
+                this.setState({ 
+                  errors: err.response.data.errors
+                });
+                console.log(err.response.data.errors);
               });
-            });
+            }
         };
         
         render() {
           const errors = this.state.errors;
-          const errorList = errors.map(error => (
-            <li key={error.toString()}>{error}</li>
-          ));
+          // const errorList = errors.map(error => (
+          //   <li key={error.toString()}>{error}</li>
+          // ));
       
           return (
             <div>
@@ -67,7 +74,7 @@ class CreateCourse extends React.Component {
                   <div>
                     <div>
                       <div className="validation-errors">
-                        <ul>{errorList}</ul>
+                        <ul>{errors}</ul>
                       </div>
                     </div>
                   </div>
