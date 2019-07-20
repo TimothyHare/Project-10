@@ -65,7 +65,11 @@ router.get("/users", authorizeUser, function(req, res, next) {
 
 
 //Post User Route 
-router.post("/users", function(req, res){
+router.post("/users", function(req, res,next){
+  if (!req.body.password) { const err = new Error('Please enter a password.');
+  err.status = 400;
+  next(err);
+} else {
   const user = new User({
     firstName: req.body.firstName, 
     lastName: req.body.lastName,
@@ -81,6 +85,7 @@ router.post("/users", function(req, res){
     console.log(err);
     res.status(400).json({error: err});
   });
+  }
 });
 
 //Courses

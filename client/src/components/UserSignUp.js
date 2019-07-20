@@ -72,7 +72,6 @@ class UserSignUp extends React.Component {
       } else {
         emailError = ''
       }
-  
          return ( 
           <div>
           <hr />
