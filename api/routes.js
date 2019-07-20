@@ -66,9 +66,10 @@ router.get("/users", authorizeUser, function(req, res, next) {
 
 //Post User Route 
 router.post("/users", function(req, res,next){
-  if (!req.body.password) { const err = new Error('Please enter a password.');
-  err.status = 400;
-  next(err);
+  if (!req.body.firstName || !req.body.lastName || !req.body.emailAddress || !req.body.password) {
+    const err = new Error('Please enter a First Name, Last Name, valid Email address and Password.');
+    err.status = 400;
+    next(err);
 } else {
   const user = new User({
     firstName: req.body.firstName, 
