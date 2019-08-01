@@ -44,10 +44,9 @@ class UserSignUp extends React.Component {
         throw new Error();
       } 
     }).catch(err => {        
-      console.log("CATCH =", err.response.data.error);
+      console.log("CATCH =", err.response.data.message);
       this.setState({       
         errors: err.response.data.error.message,
-        emailError: err.response.data.error.errmsg
       });
     }); 
   }
@@ -63,15 +62,8 @@ class UserSignUp extends React.Component {
    
     render() {   
       const errors = this.state.errors; 
-      let emailError = '';
       // const errorList = errors.map((error) =>
       //   <li key={error.toString()}>{error}</li>);
-
-      if (this.state.emailError != null) {
-        emailError = "Email already exist in database. Please choose another!"
-      } else {
-        emailError = ''
-      }
          return ( 
           <div>
           <hr />
@@ -81,7 +73,6 @@ class UserSignUp extends React.Component {
             <div>
               <div className="validation-errors">
                 <ul>{errors}</ul>
-                <ul>{emailError}</ul>
               </div>
             </div>
               <div>
