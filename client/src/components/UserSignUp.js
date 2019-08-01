@@ -46,7 +46,7 @@ class UserSignUp extends React.Component {
     }).catch(err => {        
       console.log("CATCH =", err.response.data.message);
       this.setState({       
-        errors: err.response.data.error.message,
+        errors: err.response.data.message,
       });
     }); 
   }
