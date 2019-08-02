@@ -39,7 +39,7 @@ class UserSignUp extends React.Component {
       }).then(response => { 
       if (response.status === 201) {
         alert("Account Created!");
-        this.props.history.push("/UserSignIn");
+        this.props.history.push("/Courses");
       } else {
         throw new Error();
       } 
@@ -62,8 +62,6 @@ class UserSignUp extends React.Component {
    
     render() {   
       const errors = this.state.errors; 
-      // const errorList = errors.map((error) =>
-      //   <li key={error.toString()}>{error}</li>);
          return ( 
           <div>
           <hr />
