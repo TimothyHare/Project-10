@@ -85,73 +85,46 @@ class UpdateCourse extends React.Component {
        console.log(this.state.course)
   
         return ( 
-         <div>
-         <hr />
-         <div className="bounds course--detail">
-           <h1>Update Course</h1>
-           <div className="validation-errors">
-               <ul>{errorList}</ul>
-             </div>
-           <div>
-             <form onSubmit={ this.handleSubmit}>
-               <div className="grid-66">
-                 <div className="course--header">
-                   <h4 className="course--label">Course</h4>
-                   <div>
-                      <input 
-                        id="title" 
-                        name="title" 
-                        type="text" 
-                        className="input-title course--title--input" 
-                        placeholder="Course title..." 
-                        defaultValue={course.title}  
-                        onChange={e => this.change(e)} 
-                      />
-                    </div>
-                   <p>By {user.firstName} {user.lastName}</p>
-                 </div>
-                 <div className="course--description">
-                   <div>
-                    <input
-                      type="text"
-                      id="description" 
-                      name="description"  
-                      defaultValue={this.state.course.description} 
-                      // placeholder={this.state.course.description}
-                      onChange={e => this.change(e)}
-                      /> 
+          <div>
+          <hr />
+          <div className="bounds course--detail">
+            <h1>Update Course</h1>
+            <div className="validation-errors">
+                <ul>{errorList}</ul>
+              </div>
+            <div>
+              <form onSubmit={ this.handleSubmit}>
+                <div className="grid-66">
+                  <div className="course--header">
+                    <h4 className="course--label">Course</h4>
+                    <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={course.title}  onChange={e => this.change(e)} /></div>
+                    <p>By {user.firstName} {user.lastName}</p>
                   </div>
-                 </div>
-               </div>
-               <div className="grid-25 grid-right">
-                 <div className="course--stats">
-                   <ul className="course--stats--list">
-                     <li className="course--stats--list--item">
-                       <h4>Estimated Time</h4>
-                       <div><input 
-                       id="estimatedTime" 
-                       name="estimatedTime" 
-                       type="text" 
-                       className="course--time--input" 
-                       placeholder="Hours" 
-                       defaultValue={this.state.course.estimatedTime} 
-                       onChange={e => this.change(e)} /></div>
-                     </li>
-                     <li className="course--stats--list--item">
-                       <h4>Materials Needed</h4>
-                       <div><textarea id="materialsNeeded" name="materialsNeeded" placeholder={this.state.course.materialsNeeded}  onChange={e => this.change(e)}/></div>
-                     </li>
-                   </ul>
-                 </div>
-               </div>
-               <div className="grid-100 pad-bottom"><button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick={this.handleCancel}>Cancel</button></div>
-             </form>
-           </div>
-         </div>
-       </div> 
+                  <div className="course--description">
+                    <div><textarea id="description" name="description"  placeholder={this.state.course.description} onChange={e => this.change(e)}/> </div>
+                  </div>
+                </div>
+                <div className="grid-25 grid-right">
+                  <div className="course--stats">
+                    <ul className="course--stats--list">
+                      <li className="course--stats--list--item">
+                        <h4>Estimated Time</h4>
+                        <div><input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" defaultValue={this.state.course.estimatedTime} onChange={e => this.change(e)} /></div>
+                      </li>
+                      <li className="course--stats--list--item">
+                        <h4>Materials Needed</h4>
+                        <div><textarea id="materialsNeeded" name="materialsNeeded" placeholder={this.state.course.materialsNeeded}  onChange={e => this.change(e)} /></div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="grid-100 pad-bottom"><button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick={this.handleCancel}>Cancel</button></div>
+              </form>
+            </div>
+          </div>
+        </div>
       );
      } 
-
 }
 
 export default UpdateCourse;

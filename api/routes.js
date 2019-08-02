@@ -125,16 +125,31 @@ router.post("/courses", authorizeUser, function(req, res, next){
   });
 });
 
-// Put Course ID Route(Karen Shea helped me with this) 
-router.put("/courses/:id", authorizeUser, function(req, res, next){
-// Source: Karen Shea/  https://stackoverflow.com/questions/5024787/update-model-with-mongoose-express-nodejs
-  Course.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, course) {
-      if (err) return res.status(400).json({error: err.message});
-      res.location('/');
-      res.status(204);
-      return res.json('Course has been updated');
+// Put Course ID Route(Johnny helped me create this) 
+router.put("/courses/:id", authorizeUser,  function(req, res, next) {
+  const id = req.params.id;
+  Course.findOneAndUpdate(
+    ({_id: id}),
+    {
+      $set: {
+        title: req.body.title,
+        description: req.body.description,
+        estimatedTime: req.body.estimatedTime,
+        materialsNeeded: req.body.materialsNeeded
+      }
+    })
+  
+  .exec()
+  .then(results =>{
+    res.status(204).json(results);
+  })
+   .catch(err => {
+  console.log(err);
+  res.status(500);
+  next(err)
   });
 });
+
 
 // Delete Course ID Route(Johnny Louifils/Karen Shea helped me with this) 
 router.delete("/courses/:id", authorizeUser, function(req, res, next){
