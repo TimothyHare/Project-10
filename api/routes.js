@@ -125,7 +125,7 @@ router.post("/courses", authorizeUser, function(req, res, next){
   });
 });
 
-// Put Course ID Route(Johnny helped me create this) 
+// Put Course ID Route(Johnny helped me change this) 
 router.put("/courses/:id", authorizeUser,  function(req, res, next) {
   const id = req.params.id;
   Course.findOneAndUpdate(
@@ -149,7 +149,6 @@ router.put("/courses/:id", authorizeUser,  function(req, res, next) {
   next(err)
   });
 });
-
 
 // Delete Course ID Route(Johnny Louifils/Karen Shea helped me with this) 
 router.delete("/courses/:id", authorizeUser, function(req, res, next){
