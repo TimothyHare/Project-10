@@ -78,9 +78,9 @@ class UpdateCourse extends React.Component {
 
   render() {
     
- const errors = this.state.errors; 
- const errorList = errors.map((error) =>
-   <li key={error.toString()}>{error}</li>);
+ const errors = this.state.message; 
+ //const errorList = errors.map((error) =>
+  // <li key={error.toString()}>{error}</li>);
    const { course, user } = this.state;
 
     return ( 
@@ -89,7 +89,7 @@ class UpdateCourse extends React.Component {
      <div className="bounds course--detail">
        <h1>Update Course</h1>
        <div className="validation-errors">
-           <ul>{errorList}</ul>
+           <ul>{errors}</ul>
          </div>
        <div>
          <form onSubmit={ this.handleSubmit}>
