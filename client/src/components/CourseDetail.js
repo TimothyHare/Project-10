@@ -108,12 +108,12 @@ class CourseDetail extends React.Component {
                   <ul className="course--stats--list">
                     <li className="course--stats--list--item">
                       <h4>Estimated Time</h4>
-                      <h3>{course.estimatedTime} hours</h3>
+                      <h3>{course.estimatedTime} </h3>
                     </li>
                     <li className="course--stats--list--item">
                       <h4>Materials Needed</h4>
                       <ul>
-                       <ReactMarkdown source={` * ${course.materialsNeeded}`} /> 
+                       <ReactMarkdown source={`  ${course.materialsNeeded}`} /> 
                       </ul>
                     </li>
                   </ul>

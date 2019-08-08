@@ -50,9 +50,9 @@ class UpdateCourse extends React.Component {
         }
       })
       .catch(err => {
-        console.log("CATCH =", err.response.data.errors);
+        console.log("CATCH =", err.response.data.message);
         this.setState({
-          errors: err.response.data.errors
+          errors: err.response.data.message
         });
       });
   };

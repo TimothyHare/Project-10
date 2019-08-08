@@ -109,45 +109,57 @@ router.get("/courses/:id", function(req, res, next){
 
 //Post Course Route 
 router.post("/courses", authorizeUser, function(req, res, next){
-  const user = req.currentUser;
-  var course = new Course({
-      user: user._id,
-      title: req.body.title,
-      description: req.body.description,
-      estimatedTime: req.body.estimatedTime,
-      materialsNeeded: req.body.materialsNeeded
+  const user = req.currentUser
+  const course = new Course({
+    user: user._id, 
+    title: req.body.title,
+    description: req.body.description,
+    estimatedTime: req.body.estimatedTime,
+    materialsNeeded: req.body.materialsNeeded
   });
-  course.save(function(err){
-      if (err) 
-        return next(err);
-      res.location("/" + course.id);
-      res.status(201).end();
+  if(course.title && course.description){
+  course.save(function(err, Course){
+      if(err) return next(err);
+      res.status(201);
+      res.json(Course);
   });
+ }  else {
+  const err = new Error("need title and description");
+  err.status = 401;
+  return next(err);
+ }
 });
 
-// Put Course ID Route(Johnny helped me change this) 
-router.put("/courses/:id", authorizeUser,  function(req, res, next) {
-  const id = req.params.id;
-  Course.findOneAndUpdate(
-    ({_id: id}),
-    {
-      $set: {
-        title: req.body.title,
-        description: req.body.description,
-        estimatedTime: req.body.estimatedTime,
-        materialsNeeded: req.body.materialsNeeded
+// Put to Update Course ID Route(Johnny helped me change this) 
+router.put("/courses/:id", authorizeUser, function(req, res, next) {
+  if(!req.body.title && !req.body.description) {
+   const err = new Error("Please enter a title and a description.");
+   err.status = 400;
+   next(err);
+ } else if (!req.body.title) {
+   const err = new Error("Please enter a title.");
+   err.status = 400;
+   next(err);
+ } else if (!req.body.description) {
+   const err = new Error("Please enter a description.");
+   err.status = 400;
+   next(err);
+} else {
+  Course.findOneAndUpdate({
+    where: { id: req.body.id },
+    }).then((course) => {
+      if(!course) {
+        res.status(404).json({message: "Course Not Found"});
+      } else {
+        course.update(req.body);
+        res.location("/courses" + req.body.id);
+        res.status(204).end();
       }
-    })
-  
-  .exec()
-  .then(results =>{
-    res.status(204).json(results);
-  })
-   .catch(err => {
-  console.log(err);
-  res.status(500);
-  next(err)
-  });
+      }).catch((err) => {
+         err.status = 500;
+         next(err);
+    });
+  }
 });
 
 // Delete Course ID Route(Johnny Louifils/Karen Shea helped me with this) 
