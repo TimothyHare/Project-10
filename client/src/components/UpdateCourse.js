@@ -78,7 +78,7 @@ class UpdateCourse extends React.Component {
 
   render() {
     
- const errors = this.state.message; 
+ const errors = this.state.errors; 
  //const errorList = errors.map((error) =>
   // <li key={error.toString()}>{error}</li>);
    const { course, user } = this.state;
