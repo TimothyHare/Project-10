@@ -36,6 +36,7 @@ class UpdateCourse extends React.Component {
             password: window.localStorage.getItem('Password')
          },
           data: {
+              id:params.id,
               title: this.state.title,
               description: this.state.description,
               estimatedTime: this.state.estimatedTime,
