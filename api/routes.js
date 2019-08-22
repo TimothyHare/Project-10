@@ -145,7 +145,7 @@ router.put("/courses/:id", authorizeUser, function(req, res, next) {
    err.status = 400;
    next(err);
 } else {
-  Course.findOneAndUpdate({_id: req.body.id})
+  Course.findOne({_id: req.body.id})
   .then((course) => {
       if(!course) {
         res.status(404).json({message: "Course Not Found"});
