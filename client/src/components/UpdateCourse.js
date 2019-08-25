@@ -70,8 +70,14 @@ class UpdateCourse extends React.Component {
     .get(`http://localhost:5000/api/courses/${params.id}`)
     .then(results => {
         this.setState({
-            course: results.data,
-            user: results.data.user
+            user: results.data.user,
+            data: {
+              id: this.state.id,
+              title: this.state.title,
+              description: this.state.description,
+              estimatedTime: this.state.estimatedTime,
+              materialsNeeded: this.state.materialsNeeded
+              }
         });
     });
 
@@ -82,7 +88,7 @@ class UpdateCourse extends React.Component {
  const errors = this.state.errors; 
  //const errorList = errors.map((error) =>
   // <li key={error.toString()}>{error}</li>);
-   const { course, user } = this.state;
+   const { user } = this.state;
 
     return ( 
      <div>
@@ -97,11 +103,11 @@ class UpdateCourse extends React.Component {
            <div className="grid-66">
              <div className="course--header">
                <h4 className="course--label">Course</h4>
-               <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={course.title}  onChange={e => this.change(e)} /></div>
+               <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={this.state.title}  onChange={e => this.change(e)} /></div>
                <p>By {user.firstName} {user.lastName}</p>
              </div>
              <div className="course--description">
-               <div><textarea id="description" name="description"  placeholder={this.state.course.description} onChange={e => this.change(e)}/> </div>
+               <div><textarea id="description" name="description"  placeholder={this.state.description} onChange={e => this.change(e)}/> </div>
              </div>
            </div>
            <div className="grid-25 grid-right">
@@ -113,7 +119,7 @@ class UpdateCourse extends React.Component {
                  </li>
                  <li className="course--stats--list--item">
                    <h4>Materials Needed</h4>
-                   <div><textarea id="materialsNeeded" name="materialsNeeded" placeholder={this.state.course.materialsNeeded}  onChange={e => this.change(e)} /></div>
+                   <div><textarea id="materialsNeeded" name="materialsNeeded" placeholder={this.state.materialsNeeded}  onChange={e => this.change(e)} /></div>
                  </li>
                </ul>
              </div>
