@@ -102,12 +102,35 @@ router.get("/courses", function(req, res, next){
       });
 });
 
-// Get Course ID 
+// Get Course ID: For Specific Courses
 router.get("/courses/:id", function(req, res, next){
   res.json(req.Course);
 });
 
-//Post Course Route 
+//Post Course: For Creating Courses
+router.post("/courses", authorizeUser, function(req, res, next) {
+  const user = req.currentUser
+  const course = new Course({
+    user: user._id, 
+    title: req.body.title,
+    description: req.body.description,
+    estimatedTime: req.body.estimatedTime,
+    materialsNeeded: req.body.materialsNeeded
+  });
+  if(course.title && course.description){
+  course.save(function(err, Course){
+      if(err) return next(err);
+      res.status(201);
+      res.json(Course);
+  });
+ }  else {
+  const err = new Error("Title and Description Needed");
+  err.status = 401;
+  return next(err);
+ }
+});
+
+//Put Course: Route to Update Course 
 router.put("/courses/:id", authorizeUser,  function(req, res, next) {
   if(!req.body.title && !req.body.description) {
     const err = new Error('Please enter a title and a description.');
