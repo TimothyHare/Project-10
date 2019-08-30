@@ -10,17 +10,17 @@ class UserSignOut extends React.Component{
         window.localStorage.removeItem('Password')
         window.localStorage.removeItem('UserId')
         window.localStorage.removeItem('IsLoggedIn')
-        window.location.assign('/UserSignIn')
+        window.location.assign('/')
         
       }
         componentDidMount() {
             this.logOut();
         }
     
-        // User is redirected to "/UserSignIn" after logging out.
+        // User is redirected to "/Courses" after logging out.
         render(){
             return(
-                <Redirect to="/UserSignIn" />
+                <Redirect to="/" />
             )
         }
 } 
