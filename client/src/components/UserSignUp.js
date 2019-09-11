@@ -39,7 +39,10 @@ class UserSignUp extends React.Component {
       }).then(response => { 
       if (response.status === 201) {
         alert("Account Created!");
-        this.props.history.push("/");
+        let user ={ 
+        emailAddress: this.state.emailAddress,
+        password: this.state.password}
+        this.props.signIn(user);
       } else {
         throw new Error();
       } 

@@ -56,7 +56,7 @@ signIn(userInfo) {
             <PrivateRoute path="/courses/:id/update" component={UpdateCourse} /> 
             <Route exact path="/courses/:id" component={CourseDetail} />
             <Route exact path="/usersignin" component={() => <UserSignIn  signIn={this.signIn}/>} /> 
-            <Route exact path="/usersignup" component={UserSignUp} />
+            <Route exact path="/usersignup" component={() => <UserSignUp  signIn={this.signIn}/>} />
             <Route exact path="/usersignout" component={UserSignOut} />
             <Route exact path="/error" render={() => <Error />} />
             <Route exact path='/notfound' component = {NotFound} />
